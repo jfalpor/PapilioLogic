@@ -41,19 +41,20 @@
 	"expanded_folders":
 	[
 		"/C/Users/carlo/Documents/dev/PapilioLogic",
-		"/C/Users/carlo/Documents/dev/PapilioLogic/app",
-		"/C/Users/carlo/Documents/dev/PapilioLogic/img"
+		"/C/Users/carlo/Documents/dev/PapilioLogic/app"
 	],
 	"file_history":
 	[
-		"/C/Users/carlo/Documents/dev/PapilioLogic/Dockerfile",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/app/main.py",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/docker-compose.yml",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/.env.example",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/app/consumer_to_graph.py",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/.env",
 		"/C/Users/carlo/Documents/dev/PapilioLogic/entrypoint.sh",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/Dockerfile",
 		"/C/Users/carlo/Documents/dev/PapilioLogic/Dockerfile.ollama",
 		"/C/Users/carlo/Documents/dev/PapilioLogic/README.md",
 		"/C/Users/carlo/Documents/dev/PapilioLogic/img/arquitectura.mmd",
-		"/C/Users/carlo/Documents/dev/PapilioLogic/docker-compose.yml",
-		"/C/Users/carlo/Documents/dev/PapilioLogic/.env",
-		"/C/Users/carlo/Documents/dev/PapilioLogic/.env.example",
 		"/C/Users/carlo/Documents/dev/PapilioLogic/app/interfaz.py",
 		"/C/Users/carlo/Documents/dev/PapilioLogic/.gitignore",
 		"/C/Users/carlo/Documents/dev/PapilioLogic/proyecto.sublime-project",

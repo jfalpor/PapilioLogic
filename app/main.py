@@ -6,9 +6,10 @@ import os
 from datetime import datetime
 
 # Configuración de conexión
+# Lee del .env, y si no existe, usa valores por defecto seguros
 URI = os.getenv("NEO4J_URI", "bolt://neo4j:7687")
-USER = "neo4j"
-PASSWORD = "password123"
+USER = os.getenv("NEO4J_USER", "neo4j")
+PASSWORD = os.getenv("NEO4J_PASSWORD", "papilio2026") # Asegúrate que este sea el mismo del .env
 
 class PortNexus_Engine:
     def __init__(self):

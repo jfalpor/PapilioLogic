@@ -17,3 +17,8 @@ env/
 
 # Datos temporales (Neo4j/Kafka si los corres local)
 *.log
+
+# Datos de contenedores (Persistencia local)
+neo4j_data/
+ollama_data/
+kafka_data/
