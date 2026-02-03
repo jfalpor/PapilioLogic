@@ -36,3 +36,5 @@ La arquitectura de PapilioLogic se basa en la capacidad de conectar eventos glob
 * **Base de Datos de Grafos:** Neo4j
 * **Inferencia:** Microsoft `DoWhy`
 * **LLM Local:** Ollama (Llama 3 / Mistral)
+
+![Arquitectura](img/arquitectura.png)

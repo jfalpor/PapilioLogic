@@ -40,11 +40,11 @@
 	},
 	"expanded_folders":
 	[
-		"/D/OneDrive/dev/proyecto",
-		"/D/OneDrive/dev/proyecto/app"
+		"/C/Users/carlo/Documents/dev/PapilioLogic"
 	],
 	"file_history":
 	[
+		"/C/Users/carlo/Documents/dev/PapilioLogic/proyecto.sublime-project",
 		"/D/OneDrive/dev/proyecto/Dockerfile.ollama",
 		"/D/OneDrive/dev/proyecto/docker-compose.yml",
 		"/D/OneDrive/dev/proyecto/app/butterfly_effect_emitter.py",
