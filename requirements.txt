@@ -1,0 +1,20 @@
+# Interfaz y Dashboard
+streamlit
+watchdog
+
+# Base de datos de grafos y lógica de redes
+neo4j
+networkx
+
+# Procesamiento de datos y Causal ML
+pandas
+dowhy
+pyarrow
+
+# Comunicación y Mensajería
+kafka-python
+
+# Utilidades
+python-dotenv
+
+confluent-kafka

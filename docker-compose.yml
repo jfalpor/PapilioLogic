@@ -1,0 +1,80 @@
+version: '3.8'
+
+services:
+  # --- BASE DE DATOS DE GRAFOS ---
+  neo4j:
+    image: neo4j:5.12
+    container_name: prox_graph
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    environment:
+      - NEO4J_AUTH=neo4j/password123
+      - NEO4J_PLUGINS=["apoc"]
+      - NEO4J_dbms_security_procedures_unrestricted=apoc.*
+    restart: always
+
+  # --- INFRAESTRUCTURA DE EVENTOS ---
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.4.0
+    container_name: prox_zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+
+  kafka:
+    image: confluentinc/cp-kafka:7.4.0
+    container_name: prox_kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,CONNECTOR://kafka:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONNECTOR:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: CONNECTOR
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  akhq:
+    image: tchiotludo/akhq:latest
+    container_name: prox_akhq
+    ports:
+      - "8080:8080"
+    environment:
+      AKHQ_CONFIGURATION: |
+        akhq:
+          connections:
+            portnexus-kafka:
+              properties:
+                bootstrap.servers: "kafka:29092"
+    depends_on:
+      - kafka
+
+  # --- LÓGICA DEL PROYECTO ---
+  app:
+    build: .
+    container_name: prox_logic
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    depends_on:
+      - neo4j
+      - kafka
+
+  ollama:
+    build:
+      context: .
+      dockerfile: Dockerfile.ollama
+    container_name: prox_ai_brain
+    volumes:
+      - ./ollama_data:/root/.ollama
+    ports:
+      - "11434:11434"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: always

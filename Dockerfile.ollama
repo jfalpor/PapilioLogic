@@ -1,0 +1,13 @@
+FROM ollama/ollama:latest
+
+# Exponer el puerto
+EXPOSE 11434
+
+# Script para pre-descargar el modelo durante el build
+RUN apt-get update && apt-get install -y curl
+RUN nohup bash -c "ollama serve &" && \
+    sleep 5 && \
+    ollama pull llama3 && \
+    pkill ollama
+
+ENTRYPOINT ["ollama", "serve"]
