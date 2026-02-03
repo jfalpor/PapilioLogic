@@ -1,0 +1,19 @@
+# Entorno y Secretos
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+
+# IDEs
+.vscode/
+.idea/
+
+# Datos temporales (Neo4j/Kafka si los corres local)
+*.log
