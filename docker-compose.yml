@@ -1,15 +1,16 @@
 version: '3.8'
 
 services:
-  # --- BASE DE DATOS DE GRAFOS ---
+  # --- BASE DE DATOS DE GRAFOS (PailioLogic_Architecture) ---
   neo4j:
     image: neo4j:5.12
-    container_name: prox_graph
+    container_name: papilio_graph
     ports:
       - "7474:7474"
       - "7687:7687"
+    env_file: .env # Inyecta NEO4J_USER y NEO4J_PASSWORD
     environment:
-      - NEO4J_AUTH=neo4j/password123
+      - NEO4J_AUTH=${NEO4J_USER}/${NEO4J_PASSWORD}
       - NEO4J_PLUGINS=["apoc"]
       - NEO4J_dbms_security_procedures_unrestricted=apoc.*
     restart: always
@@ -17,20 +18,22 @@ services:
   # --- INFRAESTRUCTURA DE EVENTOS ---
   zookeeper:
     image: confluentinc/cp-zookeeper:7.4.0
-    container_name: prox_zookeeper
+    container_name: papilio_zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
 
   kafka:
     image: confluentinc/cp-kafka:7.4.0
-    container_name: prox_kafka
+    container_name: papilio_kafka
     depends_on:
       - zookeeper
     ports:
       - "9092:9092"
+    env_file: .env
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      # Localhost para tu PC, kafka:29092 para la comunicación interna entre contenedores
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,CONNECTOR://kafka:29092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONNECTOR:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: CONNECTOR
@@ -38,36 +41,39 @@ services:
 
   akhq:
     image: tchiotludo/akhq:latest
-    container_name: prox_akhq
+    container_name: papilio_akhq
     ports:
       - "8080:8080"
     environment:
       AKHQ_CONFIGURATION: |
         akhq:
           connections:
-            portnexus-kafka:
+            pailiologic-kafka:
               properties:
                 bootstrap.servers: "kafka:29092"
     depends_on:
       - kafka
 
-  # --- LÓGICA DEL PROYECTO ---
+  # --- LÓGICA DEL PROYECTO (Streamlit + Causal ML) ---
   app:
     build: .
-    container_name: prox_logic
+    container_name: papilio_logic
     ports:
       - "8501:8501"
+    env_file: .env # Inyecta todas las variables para que os.getenv funcione
     volumes:
       - .:/app
     depends_on:
       - neo4j
       - kafka
 
+  # --- INTERFAZ INTELIGENTE (Ollama) ---
   ollama:
     build:
       context: .
       dockerfile: Dockerfile.ollama
-    container_name: prox_ai_brain
+    container_name: papilio_ai_brain
+    env_file: .env # Inyecta OLLAMA_MODEL para el script de descarga
     volumes:
       - ./ollama_data:/root/.ollama
     ports:

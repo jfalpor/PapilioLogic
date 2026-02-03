@@ -15,5 +15,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copiamos todo el contenido de Proyecto_X a /app
 COPY . .
 
+EXPOSE 8501
+
 # Comando corregido: ejecutamos Streamlit apuntando a la subcarpeta app/
 CMD ["streamlit", "run", "app/main.py", "--server.port=8501", "--server.address=0.0.0.0"]

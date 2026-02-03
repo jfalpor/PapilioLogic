@@ -1,13 +1,13 @@
 FROM ollama/ollama:latest
 
+# Instalamos curl para verificar que el servicio está listo
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
+# Copiamos un script de inicialización
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 # Exponer el puerto
 EXPOSE 11434
 
-# Script para pre-descargar el modelo durante el build
-RUN apt-get update && apt-get install -y curl
-RUN nohup bash -c "ollama serve &" && \
-    sleep 5 && \
-    ollama pull llama3 && \
-    pkill ollama
-
-ENTRYPOINT ["ollama", "serve"]
+ENTRYPOINT ["/entrypoint.sh"]
