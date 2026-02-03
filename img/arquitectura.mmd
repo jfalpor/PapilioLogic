@@ -1,44 +1,53 @@
 graph TD
-    %% Definición de estilos corregidos
+    %% Estilos
     classDef infraestilo fill:#1e1e26,stroke:#4a4e69,color:#f2e9e4,stroke-width:2px;
+    classDef topicstyle fill:#444,stroke:#00fbff,color:#00fbff,stroke-width:1px,stroke-dasharray: 5 5;
     classDef relstyle fill:#22223b,stroke:#9a8c98,color:#f2e9e4,stroke-width:2px;
     classDef brainstyle fill:#4a4e69,stroke:#c9ada7,color:#f2e9e4,stroke-width:2px;
     classDef twinstyle fill:#9a8c98,stroke:#f2e9e4,color:#22223b,stroke-width:3px;
-    classDef ollamastyle fill:#c9ada7,stroke:#22223b,color:#22223b,stroke-width:2px;
+    classDef toolstyle fill:#333,stroke:#ff9900,color:#fff,stroke-width:2px;
 
     subgraph PailioLogic_Architecture
-        %% Capa de Datos
-        A[/"📡 Captura Exógena & Local"/]
-        B["🌊 Ingesta: Apache Kafka"]
+        %% Capa de Datos e Ingesta
+        A[/"📡 Sensores (AIS, Meteo, Logística)"/]
         
+        subgraph Kafka_Bus [Broker: Apache Kafka]
+            B1["<b>Topic:</b> raw_events"]
+            B2["<b>Topic:</b> filtered_causality"]
+        end
+
+        %% Herramienta de Observabilidad
+        AK["👁️ AKHQ (Monitor)"]
+
         %% Capa de Estructura
-        C[("🕸️ Motor de Relaciones: Neo4j")]
+        C[("🕸️ Grafo: Neo4j")]
         
         %% Capa de Inteligencia Causal
-        D{{"⚙️ Inferencia: Causal ML DoWhy"}}
+        D{{"⚙️ Inferencia: DoWhy"}}
         E["🦋 Análisis Efecto Mariposa"]
         
         %% Capa de Simulación
-        F[["🪞 Gemelo Digital Predictivo"]]
-        G["🚨 Detección de Anomalías"]
-        
-        %% Capa de Interacción
-        H("(🦙) OLLAMA: Interfaz Inteligente")
+        F[["🪞 Gemelo Digital"]]
+        H("(🦙) OLLAMA")
 
-        %% Flujos y Conexiones
-        A --> B
-        B --> C
-        C -.->|Recursividad| C
-        C --> D
+        %% Flujos con Topics
+        A --> B1
+        B1 -->|Ingestor/Parser| C
+        C --> B2
+        B2 --> D
         D --> E
         E --> F
-        F --> G
-        H <==>|Consulta Local| F
+        H <==> F
+
+        %% Conexiones de Observabilidad
+        B1 -.-> AK
+        B2 -.-> AK
     end
 
     %% Aplicación de estilos
-    class A,B infraestilo;
+    class A infraestilo;
+    class B1,B2 topicstyle;
     class C relstyle;
     class D,E brainstyle;
-    class F,G twinstyle;
-    class H ollamastyle;
+    class F,H twinstyle;
+    class AK toolstyle;
