@@ -1,0 +1,49 @@
+ollama list
+ollama pull llama3
+
+Para crear los topics y ver que estan creados
+===============================================
+kafka-topics --create --topic raw_events --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+
+kafka-topics --create --topic filtered_causality --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+
+kafka-topics --list --bootstrap-server localhost:9092
+
+
+Consultas de Estado Actual
+Estas sirven para verificar que la IA "ve" los datos del grafo:
+
+"¿Qué buques tienen actualmente un riesgo superior a 0.5?"
+
+"¿Cuántos barcos hay en el Muelle_Norte ahora mismo?"
+
+"Haz un resumen técnico de la situación en la Terminal_Contenedores."
+
+2. Análisis del Efecto Mariposa
+Para evaluar la capacidad predictiva sobre el flujo logístico [cite: 2026-02-01]:
+
+"¿Cómo afectará la Niebla al buque que está en el Muelle_Sur?"
+
+"Si hay una Huelga, ¿qué buques se verán afectados primero?"
+
+"Explica el impacto de la Avería detectada en el Vessel_XXX."
+
+3. Detección de Anomalías y Priorización
+Para que el sistema actúe como motor de decisión [cite: 2026-02-01]:
+
+"¿Cuál es el factor externo más crítico en este momento según los datos?"
+
+"¿Hay algún buque que requiera acción inmediata por riesgo de cuello de botella?"
+
+"Basado en el estado actual, ¿qué muelle presenta mayor saturación de riesgos?"
+
+4. Prueba de Restricción (Seguridad)
+Para confirmar que no inventa información externa [cite: 2026-02-02]:
+
+"¿Qué tiempo hará mañana en el puerto?"
+
+(La IA debería responder que no tiene esos datos si no los has inyectado).
+
+"¿Cuál es la profundidad del canal de entrada?"
+
+(Debería decir "Información insuficiente" si el nodo Muelle no tiene ese atributo).

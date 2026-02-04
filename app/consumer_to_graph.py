@@ -1,61 +1,75 @@
-import os
 import json
-from neo4j import GraphDatabase
+import os
 from confluent_kafka import Consumer
+from neo4j import GraphDatabase
 
-# --- CONFIGURACIÓN DE CONEXIÓN ---
-# Usamos os.getenv para que use las llaves que Docker ya tiene
-NEO4J_URI = os.getenv("NEO4J_URI", "bolt://papilio_graph:7687")
+# --- CONFIGURACIÓN (PailioLogic Architecture) ---
+NEO4J_URI = os.getenv("NEO4J_URI", "bolt://neo4j:7687")
 NEO4J_USER = os.getenv("NEO4J_USER", "neo4j")
-NEO4J_PASS = os.getenv("NEO4J_PASSWORD", "papilio2026")
+NEO4J_PASS = os.getenv("NEO4J_PASSWORD", "papilio_logic_2026")
+KAFKA_BOOTSTRAP = os.getenv("KAFKA_BOOTSTRAP_SERVERS", "papilio_kafka:29092")
+KAFKA_TOPIC = os.getenv("KAFKA_TOPIC_INPUT", "raw_events")
 
-KAFKA_BOOTSTRAP = os.getenv("KAFKA_BOOTSTRAP", "papilio_kafka:29092")
-
-# Inicializar Driver de Neo4j
 driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASS))
 
-def save_to_neo4j(topic, data):
+def save_to_neo4j(data):
     with driver.session() as session:
-        if topic == "raw_events":
+        # 1. PROCESAMIENTO DE BUQUE
+        if data.get('type') == 'buque':
+            # Usamos 'name' para que Neo4j lo pinte en la bola morada
             query = """
             MERGE (b:Buque {mmsi: $mmsi})
-            SET b.name = $name
-            WITH b
-            UNWIND $factors as f_data
-            MERGE (f:FactorExterno {id: f_data.id})
-            SET f.type = f_data.type, f.delay = f_data.delay
-            MERGE (b)-[:AFECTADO_POR]->(f)
+            SET b.name = $name, b.status = $status
             """
-            session.run(query, mmsi=data.get('mmsi'), name=data.get('name'), 
-                        factors=data.get('factors', []))
-            print(f"✅ Evento guardado en Grafo: {data.get('name')}")
+            session.run(query, mmsi=data.get('mmsi'), name=data.get('name'), status=data.get('status'))
+            print(f"⚓ Buque guardado: {data.get('name')}")
 
-# --- CONFIGURACIÓN CONSUMER ---
+        # 2. PROCESAMIENTO DE FACTOR EXTERNO (LA BOLA NARANJA)
+        elif data.get('type') == 'factor_externo':
+            # IMPORTANTE: Seteamos 'name' con el valor de 'subtype' (ej: Huelga_Laboral)
+            # Neo4j mostrará automáticamente este nombre dentro de la bola naranja.
+            query_factor = """
+            MERGE (f:FactorExterno {id: $factor_id})
+            SET f.tipo = $subtype, 
+                f.name = $subtype, 
+                f.gravedad = $severity, 
+                f.target_mmsi = $target_mmsi
+            """
+            session.run(query_factor, 
+                        factor_id=data.get('factor_id'), 
+                        subtype=data.get('subtype'), 
+                        severity=data.get('severity'),
+                        target_mmsi=data.get('target_mmsi'))
+            
+            print(f"🦋 Factor guardado: {data.get('subtype')}")
+
+            # 3. CREAR LA UNIÓN AUTOMÁTICA
+            if data.get('target_mmsi'):
+                query_rel = """
+                MATCH (b:Buque {mmsi: $target_mmsi}), (f:FactorExterno {id: $factor_id})
+                MERGE (f)-[:IMPACTA_EN]->(b)
+                """
+                session.run(query_rel, target_mmsi=data.get('target_mmsi'), factor_id=data.get('factor_id'))
+                print("🔗 Unión creada en el grafo.")
+
+# --- LÓGICA DEL CONSUMER ---
 conf = {
     'bootstrap.servers': KAFKA_BOOTSTRAP,
-    'group.id': 'portnexus_consumer_group',
+    'group.id': 'pailiologic_group',
     'auto.offset.reset': 'earliest'
 }
-
 consumer = Consumer(conf)
-consumer.subscribe(['raw_events'])
+consumer.subscribe([KAFKA_TOPIC])
 
-print("📡 PortNexus AI: Escuchando eventos... (Ctrl+C para parar)")
+print(f"📡 Ingestor activo en {KAFKA_TOPIC}...")
 
 try:
     while True:
         msg = consumer.poll(1.0)
         if msg is None: continue
-        if msg.error():
-            print(f"Error: {msg.error()}")
-            continue
-
-        # Procesar mensaje
         valor = json.loads(msg.value().decode('utf-8'))
-        save_to_neo4j(msg.topic(), valor)
-
-except KeyboardInterrupt:
-    pass
+        save_to_neo4j(valor)
+except Exception as e:
+    print(f"❌ Error: {e}")
 finally:
     consumer.close()
-    driver.close()

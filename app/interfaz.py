@@ -17,7 +17,7 @@ class PailioInterface:
 
     def consultar(self, pregunta, contexto_del_grafo=""):
         # Unimos el prompt del sistema, el contexto de Neo4j y la pregunta
-        prompt_completo = f"{self.system_prompt}\nContexto: {contexto_del_grafo}\nPregunta: {pregunta}"
+        prompt_completo = f"{self.system_prompt}\nContexto: {contexto_del_grafo}\nDime que quieres saber: {pregunta}"
         
         try:
             response = requests.post(
