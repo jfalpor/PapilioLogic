@@ -7,6 +7,13 @@ kafka-topics --create --topic raw_events --bootstrap-server localhost:9092 --par
 
 kafka-topics --create --topic filtered_causality --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
 
+kafka-topics --create --topic escalas --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
+## partitions         -- Carriles, en desarrollo con uno vale
+## replication-factor -- copias del topic existen en diferentes servidores por si uno se rompe
+-------------------------------------------------------------------------------------
+kafka-console-producer --topic escalas --bootstrap-server localhost:9092 --property "parse.key=true" --property "key.separator=:"
+9234567:{"source": "SIPLA", "timestamp": "2026-02-04T17:20:00Z", "payload": {"lloyd_id": "9234567", "eta": "2026-02-05T08:00:00Z", "muelle_solicitado": "Muelle_Sur_02", "etd_estimada": "2026-02-06T12:00:00Z"}}
+-------------------------------------------------------------------------------------
 kafka-topics --list --bootstrap-server localhost:9092
 
 

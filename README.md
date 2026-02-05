@@ -1,12 +1,12 @@
-# PailioLogic 🦋
+# PapilioLogic 🦋
 
-**PailioLogic** es un motor predictivo avanzado diseñado para identificar y mitigar el "Efecto Mariposa" en entornos marítimos. El sistema analiza cómo variables distantes y factores externos impactan en el flujo local de un puerto, detectando cuellos de botella antes de que se manifiesten físicamente. 
+**PapilioLogic** es un motor predictivo avanzado diseñado para identificar y mitigar el "Efecto Mariposa" en entornos marítimos. El sistema analiza cómo variables distantes y factores externos impactan en el flujo local de un puerto, detectando cuellos de botella antes de que se manifiesten físicamente. 
 
 > **Nota:** Todo el sistema está diseñado para ejecutarse **100% dentro de Docker y de forma local**, garantizando la privacidad, la soberanía de los datos y la portabilidad del entorno.
 
 ## 🏗️ Arquitectura del Sistema
 
-La arquitectura de PailioLogic se basa en la capacidad de conectar eventos globales con operaciones locales mediante un stack tecnológico de alto rendimiento y ejecución local orquestada por contenedores.
+La arquitectura de PapilioLogic se basa en la capacidad de conectar eventos globales con operaciones locales mediante un stack tecnológico de alto rendimiento y ejecución local orquestada por contenedores.
 
 ### Componentes Principales
 
@@ -25,7 +25,7 @@ La arquitectura de PailioLogic se basa en la capacidad de conectar eventos globa
 
 1. **Capa de Ingesta (Kafka):** Absorbe eventos constantes (clima, cambios geopolíticos).
 2. **Capa de Observación (AKHQ):** Interfaz visual para monitorizar los *topics* de Kafka (`raw_events` y `filtered_causality`), permitiendo la depuración del flujo de datos.
-3. **Capa de Relaciones (Neo4j):** Mapea entidades (`[Buque]`, `[Atracadero]`, `[Factor Externo]`) para visualizar la propagación del impacto.
+3. **Capa de Relaciones (Neo4j):** Mapea entidades (`[Buque]`, `[Muelle]`, `[Factor Externo]`) para visualizar la propagación del impacto.
 4. **Capa de Inteligencia Causal (DoWhy):** Valida el impacto real de un factor externo sobre el puerto local mediante el análisis del "Efecto Mariposa".
 5. **Capa de Razonamiento Local (Ollama):** Actúa como el intérprete del sistema. **Ollama** procesa los hallazgos del motor causal y el estado del grafo para generar informes y permitir interactuar con el Gemelo Digital mediante lenguaje natural.
 6. **Capa de Simulación:** Proyección final en el Gemelo Digital para la toma de decisiones.

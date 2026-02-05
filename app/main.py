@@ -11,7 +11,7 @@ URI = os.getenv("NEO4J_URI", "bolt://neo4j:7687")
 USER = os.getenv("NEO4J_USER", "neo4j")
 PASSWORD = os.getenv("NEO4J_PASSWORD", "papilio_logic_2026") 
 
-class PortNexus_Engine:
+class PapilioLogic_Engine:
     def __init__(self):
         self.driver = GraphDatabase.driver(URI, auth=(USER, PASSWORD))
 
@@ -66,7 +66,7 @@ class PortNexus_Engine:
             response = requests.post(url, json={
                 "model": os.getenv("OLLAMA_MODEL", "llama3"),
                 "prompt": prompt,
-                "system": "Eres la interfaz de lenguaje natural de PortNexus AI. Solo hablas de los datos del sistema local. Responde de forma técnica, breve y directa al grano.",
+                "system": "Eres la interfaz de lenguaje natural de Papilio Logic. Solo hablas de los datos del sistema local. Responde de forma técnica, breve y directa al grano.",
                 "stream": False,
                 "keep_alive": -1
             }, timeout=240)
@@ -84,12 +84,13 @@ class PortNexus_Engine:
         with self.driver.session() as session:
             query = """
             MATCH (b:Buque)
-            OPTIONAL MATCH (f:FactorExterno)-[:IMPACTA_EN]-(b)
-            OPTIONAL MATCH (b)-[:OCUPA]->(m:Muelle)
-            RETURN b.name as buque, 
-                   collect(f.name) as causas, 
-                   collect(f.gravedad) as gravedades,
-                   m.id as muelle
+            OPTIONAL MATCH (b)-[:SOLICITA_ATRAQUE|OCUPA]->(m:Muelle)
+            OPTIONAL MATCH (f:FactorExterno)-[:IMPACTA_EN]->(b)
+            RETURN 
+                b.name AS buque, 
+                collect(DISTINCT f.tipo) AS causas, 
+                collect(DISTINCT f.gravedad) AS gravedades,
+                COALESCE(b.muelle, m.name, m.id) AS muelle
             """
             result = session.run(query)
             return pd.DataFrame([dict(record) for record in result])
@@ -118,7 +119,7 @@ REGLA DE ORO: Si no hay datos suficientes en el sistema para la fecha {fecha_act
             response = requests.post(url, json={
                 "model": os.getenv("OLLAMA_MODEL", "llama3"),
                 "prompt": prompt,
-                "system": ( "Eres el núcleo de inteligencia de PailioLogic (PortNexus AI) [cite: 2026-02-01]. "
+                "system": ( "Eres el núcleo de inteligencia de PapilioLogic [cite: 2026-02-01]. "
                                       "Tu función es actuar como un Gemelo Digital Predictivo [cite: 2026-02-01]. "
                                       "Debes analizar cómo un factor externo (causa) genera un efecto mariposa en el flujo local del puerto [cite: 2026-02-01]. "
                                       "Usa terminología portuaria técnica (MMSI, ETA, estiba, calado, cuello de botella) y responde siempre en español."
@@ -132,8 +133,8 @@ REGLA DE ORO: Si no hay datos suficientes en el sistema para la fecha {fecha_act
             return f"Error de conexión con Ollama: {str(e)}"
 
 # --- INTERFAZ STREAMLIT (FUERA DE LA CLASE) ---
-st.set_page_config(page_title="PortNexus AI", layout="wide")
-engine = PortNexus_Engine()
+st.set_page_config(page_title="Papilio Logic AI", layout="wide")
+engine = PapilioLogic_Engine()
 
 with st.sidebar:
     st.header("🛠️ Mantenimiento")
@@ -142,7 +143,7 @@ with st.sidebar:
         st.success("Grafo reseteado")
         st.rerun()
 
-st.title("🚢 PortNexus AI: Control de Causalidad")
+st.title("🚢 Papilio Logic AI: Control de Causalidad")
 
 col1, col2 = st.columns([1, 2])
 
@@ -162,9 +163,18 @@ with col2:
     df = engine.obtener_analisis_causal()
     
     if not df.empty:
-        # Procesamiento de datos para visualización
-        df['causas_str'] = df['causas'].apply(lambda x: ", ".join(filter(None, x)) if x else "Ninguna")
-        df['riesgo_max'] = df['gravedades'].apply(lambda x: max(x) if x else 0.0)
+        # 1. Asegurar que las columnas existan antes de aplicar funciones
+        if 'causas' in df.columns:
+            df['causas_str'] = df['causas'].apply(lambda x: ", ".join(filter(None, x)) if x else "Ninguna")
+        else:
+            df['causas_str'] = "Ninguna"
+
+        if 'gravedades' in df.columns:
+            df['riesgo_max'] = df['gravedades'].apply(lambda x: max(x) if x and len(x)>0 else 0.0)
+        else:
+            df['riesgo_max'] = 0.0
+        
+        # ... resto del código (Alertas y Tabla)
         
         # Alertas de riesgo crítico
         for _, row in df.iterrows():
@@ -187,13 +197,13 @@ with col2:
                     datos_buque['causas_str'], 
                     datos_buque['riesgo_max']
                 )
-                st.info(f"**Análisis de PailioLogic:**\n\n{informe}")
+                st.info(f"**Análisis de Papilio Logic:**\n\n{informe}")
     else:
         st.info("Sistema a la espera de datos (Kafka o Manual).")
 
 # --- CONSOLA DE LENGUAJE NATURAL (MVP FINAL) ---
 st.divider()
-st.header("💬 Consola de Consulta LN (PailioLogic)")
+st.header("💬 Consola de Consulta LN (Papilio Logic)")
 with st.container():
     pregunta_usuario = st.text_input("Haz una pregunta sobre el estado del puerto (ej: ¿Cuál es el buque con más riesgo ahora?)")
     

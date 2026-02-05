@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  app_simulador:
+    build: .
+    container_name: papilio_simulador_sipla
+    environment:
+      # CAMBIO: Apuntar al contenedor real y al puerto interno de metadata
+      - KAFKA_BROKER=papilio_kafka:29092
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - red_pailiologic
+
+networks:
+  red_pailiologic:
+    external: true
+    name: papiliologic_default

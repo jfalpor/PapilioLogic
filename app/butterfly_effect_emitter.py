@@ -18,7 +18,7 @@ def send_event(topic, data):
     producer.produce(topic, json.dumps(data).encode('utf-8'), callback=delivery_report)
     producer.flush()
 
-# --- DATOS DE SIMULACIÓN (PailioLogic Architecture) ---
+# --- DATOS DE SIMULACIÓN (PapilioLogic Architecture) ---
 
 # 1. El Buque (Atraca en Neo4j)
 vessel_data = {
@@ -54,7 +54,7 @@ external_factor = {
     "target_mmsi": "235092348"
 }
 
-print("🚀 Disparando eventos hacia PortNexus AI...")
+print("🚀 Disparando eventos hacia Papilio Logic AI...")
 
 # Usamos 'raw_events' que es el que tienes en KAFKA_TOPIC_INPUT
 send_event('raw_events', vessel_data)

@@ -42,10 +42,13 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: papilio_zookeeper:2181
-      # CORRECCIÓN: Usamos el container_name 'papilio_kafka' para la red interna
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://127.0.0.1:9092,CONNECTOR://papilio_kafka:29092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONNECTOR:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: CONNECTOR
+      # Definimos dos listeners:
+      # 1. EXTERNAL: Para cuando accedas desde fuera de Docker (ej. un script en tu VS Code).
+      # 2. INTERNAL: Para que el Simulador, AKHQ y Neo4j se hablen entre sí.
+      KAFKA_ADVERTISED_LISTENERS: EXTERNAL://localhost:9092,INTERNAL://papilio_kafka:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: EXTERNAL:PLAINTEXT,INTERNAL:PLAINTEXT
+      KAFKA_LISTENERS: EXTERNAL://0.0.0.0:9092,INTERNAL://0.0.0.0:29092
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
   akhq:
