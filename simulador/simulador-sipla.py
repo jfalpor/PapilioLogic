@@ -4,59 +4,82 @@ import random
 import os
 from datetime import datetime, timedelta
 from kafka import KafkaProducer
+from neo4j import GraphDatabase
 
-# CORRECCIÓN: Usamos el nombre del contenedor y el puerto interno 29092
-# Por defecto ahora apunta a papilio_kafka:29092
+# --- CONFIGURACIÓN DE ENTORNO ---
 KAFKA_BROKER = os.getenv("KAFKA_BROKER", "papilio_kafka:29092")
+NEO4J_URI = os.getenv("NEO4J_URI", "bolt://neo4j:7687")
+NEO4J_USER = os.getenv("NEO4J_USER", "neo4j")
+NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD", "testpassword")
+TOPIC_NAME = "raw_events" # Cambiado a raw_events según tu arquitectura
 
-# Espera de seguridad para asegurar que Kafka está listo
-print(f"⌛ Esperando a Kafka en {KAFKA_BROKER}...")
-time.sleep(10) 
+# --- INICIALIZACIÓN DE CONEXIONES ---
+print(f"⌛ Esperando infraestructura (Kafka & Neo4j)...")
+time.sleep(15) 
 
 try:
+    # Conexión a Neo4j
+    neo4j_driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
+    
+    # Conexión a Kafka
     producer = KafkaProducer(
-        bootstrap_servers=['papilio_kafka:29092'],
+        bootstrap_servers=[KAFKA_BROKER],
         value_serializer=lambda v: json.dumps(v).encode('utf-8'),
         api_version=(2, 0, 2),
-        acks=1, # Esperar al menos una confirmación del broker
-        retries=5,
-        request_timeout_ms=30000 # Darle tiempo para negociar metadata
+        acks=1,
+        retries=5
     )
-    print("✅ Conectado al bus de datos Papilio Logic.")
+    print("✅ Conectado a Kafka y Neo4j.")
 except Exception as e:
-    print(f"❌ Error conectando a Kafka: {e}")
+    print(f"❌ Error de conexión: {e}")
     exit(1)
 
-muelles = ["Muelle_Sur_01", "Muelle_Sur_02", "Muelle_Norte_01", "Dique_Este", "Pantalan_A"]
+# --- OBTENCIÓN DINÁMICA DE MUELLES ---
+muelles = []
+query = "MATCH (m:Muelle) WHERE m.nombre IS NOT NULL RETURN m.nombre AS nombre"
 
-# CORRECCIÓN: El topic debe ser 'escalas' según tu arquitectura Papilio Logic
-TOPIC_NAME = "escalas"
+try:
+    with neo4j_driver.session() as session:
+        result = session.run(query)
+        # Importante: strip() para asegurar que el string sea idéntico al del importador
+        muelles = [record["nombre"].strip() for record in result]
+        
+    if not muelles:
+        print("⚠️ No se encontraron muelles en Neo4j. Revisa la propiedad 'nombre'.")
+        muelles = ["Muelle de Emergencia"]
+    else:
+        print(f"✅ Sincronizado. Muelles detectados: {muelles}")
+except Exception as e:
+    print(f"❌ Error al consultar muelles: {e}")
+    muelles = ["Muelle de Emergencia"]
 
-for i in range(20):
-    ahora = datetime.now()
-    eta = ahora + timedelta(hours=random.randint(1, 48))
-    # Generamos el ID del barco
-    lloyd_id = str(random.randint(9000000, 9999999))
-    escala = {
-        "source": "SIPLA_Docker_App",
-        "timestamp": ahora.isoformat(),
-        "payload": {
-            "lloyd_id": lloyd_id,            
-            "eta": eta.isoformat(),
-            "muelle": random.choice(muelles),
-            "etd_estimada": (eta + timedelta(hours=random.randint(12, 48))).isoformat()
+# --- BUCLE DE SIMULACIÓN ---
+try:
+    for i in range(20):
+        ahora = datetime.now()
+        eta = ahora + timedelta(hours=random.randint(1, 48))
+        lloyd_id = str(random.randint(9000000, 9999999))
+        
+        muelle_elegido = random.choice(muelles)
+        escala = {
+            "source": "SIPLA_Simulador",
+            "timestamp": ahora.isoformat(),
+            "payload": {
+                "lloyd_id": lloyd_id,            
+                "eta": eta.isoformat(),
+                "muelle": muelle_elegido, # Enviamos el nombre exacto
+                "etd_estimada": (eta + timedelta(hours=random.randint(12, 48))).isoformat()
+            }
         }
-    }
-    
-    # CORRECCIÓN: Usar la variable TOPIC_NAME
-# Convertimos el lloyd_id a bytes manualmente en el send
-    producer.send(TOPIC_NAME, key=str(lloyd_id).encode('utf-8'), value=escala)
-    print(f"🚢 [Simulador] Enviada escala {i+1}/20 - Lloyd: {escala['payload']['lloyd_id']} al topic {TOPIC_NAME}")
-    
-    time.sleep(15)
+        
+        # Envío al topic raw_events
+        producer.send(TOPIC_NAME, key=lloyd_id.encode('utf-8'), value=escala)
+        print(f"🚢 [Simulador] {i+1}/20 - Lloyd: {lloyd_id} -> {escala['payload']['muelle']}")
+        
+        time.sleep(5) # Reducido para pruebas más rápidas
 
-# Al final de tu simulador-sipla.py
-print("⏳ Vaciando buffer de mensajes...")
-producer.flush()
-time.sleep(2) # <--- Dale 2 segundos extra antes de que el contenedor muera
-print("🏁 Simulación finalizada.")
+finally:
+    print("⏳ Cerrando conexiones...")
+    producer.flush()
+    neo4j_driver.close()
+    print("🏁 Simulación finalizada.")

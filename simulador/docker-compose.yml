@@ -7,6 +7,8 @@ services:
     environment:
       # CAMBIO: Apuntar al contenedor real y al puerto interno de metadata
       - KAFKA_BROKER=papilio_kafka:29092
+      - NEO4J_USER=neo4j
+      - NEO4J_PASSWORD=papilio_logic_2026
     extra_hosts:
       - "host.docker.internal:host-gateway"
     networks:

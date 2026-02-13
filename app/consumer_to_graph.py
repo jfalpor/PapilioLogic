@@ -41,7 +41,7 @@ def save_to_neo4j(data):
                 print(f"🦋 Factor {data.get('subtype')} vinculado a MMSI {data.get('target_mmsi')}")
 
         # 3. PROCESAMIENTO DE ESCALAS (SIPLA / Gemelo Digital)
-        elif data.get('source') == 'SIPLA_Docker_App' or data.get('source') == 'escala':
+        elif data.get('source') == 'SIPLA_Simulador' or data.get('source') == 'escala':
             payload = data.get('payload', {})
             lloyd_id = payload.get('lloyd_id')
             muelle_nombre = str(payload.get('muelle')).strip()
@@ -51,7 +51,7 @@ def save_to_neo4j(data):
             SET b.name = "Ship_" + $lloyd_id,
                 b.muelle = $muelle  // Guardamos la propiedad en el buque para el DataFrame
             
-            MERGE (m:Muelle {name: $muelle})
+            MERGE (m:Muelle {nombre: $muelle})
             
             // Relación unificada
             MERGE (b)-[r:SOLICITA_ATRAQUE]->(m)

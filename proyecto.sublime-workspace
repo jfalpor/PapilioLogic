@@ -8,63 +8,87 @@
 	"buffers":
 	[
 		{
-			"file": "app/interfaz.py",
+			"file": "app/main.py",
 			"settings":
 			{
-				"buffer_size": 2650,
+				"buffer_size": 8550,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			},
 			"undo_stack":
 			[
 				[
-					3,
+					29,
+					1,
+					"insert",
+					{
+						"characters": ","
+					},
+					"AQAAAF4PAAAAAAAAXw8AAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAXg8AAAAAAABeDwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					30,
 					1,
 					"insert",
 					{
 						"characters": "\n"
 					},
-					"AQAAAAMCAAAAAAAABAIAAAAAAAAAAAAA",
-					"AQAAAAAAAAABAAAAAwIAAAAAAAADAgAAAAAAAAAAAAAAAPC/"
+					"AQAAAF8PAAAAAAAAcA8AAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAXw8AAAAAAABfDwAAAAAAAAAAAAAAAPC/"
 				],
 				[
-					4,
+					31,
 					1,
 					"paste",
 					null,
-					"AQAAAAQCAAAAAAAAIgcAAAAAAAAAAAAA",
-					"AQAAAAAAAAABAAAABAIAAAAAAAAEAgAAAAAAAAAAAAAAAPC/"
+					"AQAAAHAPAAAAAAAAfRAAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAcA8AAAAAAABwDwAAAAAAAAAAAAAAAPC/"
 				],
 				[
-					5,
+					41,
 					1,
 					"insert",
 					{
 						"characters": "\n"
 					},
-					"AQAAACIHAAAAAAAAJwcAAAAAAAAAAAAA",
-					"AQAAAAAAAAABAAAAIgcAAAAAAAAiBwAAAAAAAAAAAAAAAPC/"
+					"AQAAAHwPAAAAAAAAjQ8AAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAfA8AAAAAAAB8DwAAAAAAAAAAAAAAAPC/"
 				],
 				[
-					8,
+					42,
+					1,
+					"paste",
+					null,
+					"AQAAAI0PAAAAAAAAnQ8AAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAjQ8AAAAAAACNDwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					45,
+					1,
+					"insert",
+					{
+						"characters": "\t"
+					},
+					"AQAAAI0PAAAAAAAAkQ8AAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAjQ8AAAAAAACNDwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					49,
+					1,
+					"paste",
+					null,
+					"AQAAAJYHAAAAAAAA3BEAAAAAAABDCgAAICAgIGRlZiBjb25zdWx0YV9saWJyZV9sbihzZWxmLCBwcmVndW50YSk6CiAgICAgICAgIiIiQ29uc3VsdGEgMTAwJSBEaW7DoW1pY2E6IExlZSBUT0RBUyBsYXMgcHJvcGllZGFkZXMgZXhpc3RlbnRlcyBlbiBlbCBncmFmbyIiIgogICAgICAgIHdpdGggc2VsZi5kcml2ZXIuc2Vzc2lvbigpIGFzIHNlc3Npb246CiAgICAgICAgICAgICMgMS4gRXh0cmFlbW9zIFRPRE8gZGUgbG9zIE11ZWxsZXMgeSBUT0RPUyBsb3MgQnVxdWVzIGNvbiBzdXMgcmVsYWNpb25lcwogICAgICAgICAgICAjIE5vIG1lbmNpb25hbW9zIG5pICdlc2xvcmEnIG5pICdjYWxhZG8nLCB0cmFlbW9zIGVsIG9iamV0byBjb21wbGV0bwogICAgICAgICAgICBxdWVyeSA9ICIiIgogICAgICAgICAgICBNQVRDSCAobikKICAgICAgICAgICAgV0hFUkUgbjpNdWVsbGUgT1IgbjpCdXF1ZSBPUiBuOkZhY3RvckV4dGVybm8KICAgICAgICAgICAgT1BUSU9OQUwgTUFUQ0ggKG4pLVtyXS0+KG0pCiAgICAgICAgICAgIFJFVFVSTiBsYWJlbHMobikgYXMgZXRpcXVldGEsIAogICAgICAgICAgICAgICAgICAgcHJvcGVydGllcyhuKSBhcyBkYXRvcywgCiAgICAgICAgICAgICAgICAgICB0eXBlKHIpIGFzIHJlbGFjaW9uLCAKICAgICAgICAgICAgICAgICAgIGxhYmVscyhtKSBhcyBkZXN0aW5vX2V0aXF1ZXRhLAogICAgICAgICAgICAgICAgICAgcHJvcGVydGllcyhtKSBhcyBkZXN0aW5vX2RhdG9zCiAgICAgICAgICAgICIiIgogICAgICAgICAgICByZXN1bHQgPSBzZXNzaW9uLnJ1bihxdWVyeSkKICAgICAgICAgICAgIyBDb252ZXJ0aW1vcyB0b2RvIGVsIGdyYWZvIGFjdHVhbCBlbiB1biBzdHJpbmcgSlNPTiBwYXJhIE9sbGFtYQogICAgICAgICAgICBjb250ZXh0b191bml2ZXJzYWwgPSBbZGljdChyZWNvcmQpIGZvciByZWNvcmQgaW4gcmVzdWx0XQogICAgICAgIAogICAgICAgIGZlY2hhX2FjdHVhbCA9IGRhdGV0aW1lLm5vdygpLnN0cmZ0aW1lKCIlWS0lbS0lZCAlSDolTSIpCiAgICAgICAgdXJsID0gb3MuZ2V0ZW52KCJPTExBTUFfQkFTRV9VUkwiLCAiaHR0cDovL29sbGFtYToxMTQzNCIpICsgIi9hcGkvZ2VuZXJhdGUiCiAgICAgICAgCiAgICAgICAgcHJvbXB0ID0gZiIiIgogICAgICAgIFNJU1RFTUE6IFBhaWxpb0xvZ2ljIChQb3J0TmV4dXMgQUkpCiAgICAgICAgRVNUQURPIFRPVEFMIERFTCBHUkFGTzoge2NvbnRleHRvX3VuaXZlcnNhbH0KCiAgICAgICAgUFJFR1VOVEEgREVMIFVTVUFSSU86IHtwcmVndW50YX0KCiAgICAgICAgSU5TVFJVQ0NJw5NOOiBBbmFsaXphIGxvcyBkYXRvcyBkZWwgZ3JhZm8uIFNpIGVsIHVzdWFyaW8gcHJlZ3VudGEgcG9yIGNhcGFjaWRhZGVzLCAKICAgICAgICBjb21wYXJhIGxhcyBwcm9waWVkYWRlcyBkZSBsb3MgQnVxdWVzIGNvbiBsYXMgZGUgbG9zIE11ZWxsZXMgZG9uZGUgZXN0w6FuIChyZWxhY2nDs24gT0NVUEEvU09MSUNJVEEpLgogICAgICAgIFNpIHVuYSBwcm9waWVkYWQgKGNvbW8gZXNsb3JhKSBleGlzdGUsIMO6c2FsYS4gU2kgbm8gZXhpc3RlLCBkaSBxdWUgbm8gdGllbmVzIGVzZSBkYXRvLgogICAgICAgICIiIgogICAgICAgIAogICAgICAgICMgLi4uIChyZXN0byBkZSBsYSBwZXRpY2nDs24gcG9zdCBhIE9sbGFtYSBpZ3VhbCBxdWUgYW50ZXMpCiAgICAgICAgCiAgICAgICAgdHJ5OgogICAgICAgICAgICByZXNwb25zZSA9IHJlcXVlc3RzLnBvc3QodXJsLCBqc29uPXsKICAgICAgICAgICAgICAgICJtb2RlbCI6IG9zLmdldGVudigiT0xMQU1BX01PREVMIiwgImxsYW1hMyIpLAogICAgICAgICAgICAgICAgInByb21wdCI6IHByb21wdCwKICAgICAgICAgICAgICAgICJzeXN0ZW0iOiAiRXJlcyBlbCBleHBlcnRvIGVuIGRhdG9zIGRlIFBhcGlsaW9Mb2dpYy4gVHUgcHJpb3JpZGFkIGVzIGxhIHByZWNpc2nDs24gdMOpY25pY2Egc29icmUgY2FsYWRvcyB5IG11ZWxsZXMuIiwKICAgICAgICAgICAgICAgICJzdHJlYW0iOiBGYWxzZSwKICAgICAgICAgICAgICAgICJrZWVwX2FsaXZlIjogLTEsCiAgICAgICAgICAgICAgICAib3B0aW9ucyI6IHsKICAgICAgICAgICAgICAgICAgICAibnVtX2N0eCI6IDgxOTIsCiAgICAgICAgICAgICAgICAgICAgIm51bV9wcmVkaWN0IjogMTAwLCAgIyBMaW1pdGEgbGEgbG9uZ2l0dWQgZGUgbGEgcmVzcHVlc3RhCiAgICAgICAgICAgICAgICAgICAgInRlbXBlcmF0dXJlIjogMCwgICAgIyBIYWNlIGxhIHJlc3B1ZXN0YSBtw6FzIGRpcmVjdGEgeSB0w6ljbmljYQogICAgICAgICAgICAgICAgICAgICJudW1fdGhyZWFkIjogNCAgICAgICMgQWp1c3RhIHNlZ8O6biBsb3MgbsO6Y2xlb3MgZGUgdHUgQ1BVCiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0sIHRpbWVvdXQ9NjAwKQogICAgICAgICAgICAKICAgICAgICAgICAgaWYgcmVzcG9uc2Uuc3RhdHVzX2NvZGUgPT0gMjAwOgogICAgICAgICAgICAgICAgcmV0dXJuIHJlc3BvbnNlLmpzb24oKS5nZXQoJ3Jlc3BvbnNlJywgIlNpbiByZXNwdWVzdGEuIikKICAgICAgICAgICAgcmV0dXJuIGYiRXJyb3IgT2xsYW1hOiB7cmVzcG9uc2Uuc3RhdHVzX2NvZGV9IgogICAgICAgIGV4Y2VwdCBFeGNlcHRpb24gYXMgZToKICAgICAgICAgICAgcmV0dXJuIGYiRXJyb3IgZGUgY29uZXhpw7NuOiB7c3RyKGUpfSI",
+					"AQAAAAAAAAABAAAAzBEAAAAAAACWBwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					54,
 					1,
 					"indent",
 					null,
-					"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"
+					"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"
 				]
-			]
-		},
-		{
-			"file": "simulador/simulador-sipla.py",
-			"settings":
-			{
-				"buffer_size": 2184,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			},
-			"undo_stack":
-			[
 			]
 		}
 	],
@@ -107,24 +131,27 @@
 	"file_history":
 	[
 		"/C/Users/carlo/Documents/dev/PapilioLogic/simulador/simulador-sipla.py",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/simulador/muelles.py",
 		"/C/Users/carlo/Documents/dev/PapilioLogic/app/consumer_to_graph.py",
-		"/C/Users/carlo/Documents/dev/PapilioLogic/docker-compose.yml",
-		"/C/Users/carlo/Documents/dev/PapilioLogic/simulador/docker-compose.yml",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/app/main.py",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/.env",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/simulador/muelles.txt",
 		"/C/Users/carlo/Documents/dev/PapilioLogic/simulador/Dockerfile",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/simulador/docker-compose.yml",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/.env.example",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/app/pailiologic_brain.py",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/docker-compose.yml",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/app/interfaz.py",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/app/butterfly_effect_emitter.py",
 		"/C/Users/carlo/Documents/dev/PapilioLogic/topics_catalog.md",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/README.md",
 		"/C/Users/carlo/Documents/dev/PapilioLogic/notas.txt",
 		"/C/Users/carlo/Documents/dev/PapilioLogic/app/simulador_sipla.py",
-		"/C/Users/carlo/Documents/dev/PapilioLogic/.env",
-		"/C/Users/carlo/Documents/dev/PapilioLogic/app/main.py",
-		"/C/Users/carlo/Documents/dev/PapilioLogic/app/butterfly_effect_emitter.py",
-		"/C/Users/carlo/Documents/dev/PapilioLogic/app/interfaz.py",
-		"/C/Users/carlo/Documents/dev/PapilioLogic/.env.example",
 		"/C/Program Files/Sublime Text/notas.txt",
 		"/C/Users/carlo/Documents/dev/PapilioLogic/proyecto.sublime-project",
 		"/C/Users/carlo/Documents/dev/PapilioLogic/Dockerfile",
 		"/C/Users/carlo/Documents/dev/PapilioLogic/entrypoint.sh",
 		"/C/Users/carlo/Documents/dev/PapilioLogic/Dockerfile.ollama",
-		"/C/Users/carlo/Documents/dev/PapilioLogic/README.md",
 		"/C/Users/carlo/Documents/dev/PapilioLogic/img/arquitectura.mmd",
 		"/C/Users/carlo/Documents/dev/PapilioLogic/.gitignore",
 		"/D/OneDrive/dev/proyecto/Dockerfile.ollama",
@@ -137,13 +164,14 @@
 	],
 	"find":
 	{
-		"height": 28.0
+		"height": 39.0
 	},
 	"find_in_files":
 	{
-		"height": 104.0,
+		"height": 619.0,
 		"where_history":
 		[
+			""
 		]
 	},
 	"find_state":
@@ -151,6 +179,27 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"post",
+			"post++ç",
+			"options",
+			"ollama3",
+			"timeout",
+			"muele",
+			"Muelle asignado",
+			"MERGE (m:Muelle {name: $muelle})",
+			"MERGE",
+			"name",
+			"SYSTEM_PROMPT",
+			"consulta_libre_ln",
+			"Atracadero",
+			"portnexus-kafka",
+			"Nexus",
+			"Port",
+			"PailioLogic ",
+			"atracadero",
+			"nuevo_buque",
+			"Atracadero",
+			"PailioInterface",
 			"raw",
 			"netwo",
 			"Nex",
@@ -182,19 +231,20 @@
 			[
 				{
 					"buffer": 0,
-					"file": "app/interfaz.py",
+					"file": "app/main.py",
+					"selected": true,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2650,
+						"buffer_size": 8550,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1190,
-								1190
+								1942,
+								4808
 							]
 						],
 						"settings":
@@ -204,39 +254,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"stack_multiselect": false,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "simulador/simulador-sipla.py",
-					"selected": true,
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 2184,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								978,
-								988
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1586.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -248,11 +266,11 @@
 	],
 	"incremental_find":
 	{
-		"height": 28.0
+		"height": 27.0
 	},
 	"input":
 	{
-		"height": 40.0
+		"height": 209.0
 	},
 	"layout":
 	{
@@ -288,7 +306,7 @@
 	"project": "proyecto.sublime-project",
 	"replace":
 	{
-		"height": 52.0
+		"height": 50.0
 	},
 	"save_all_on_build": true,
 	"select_file":
