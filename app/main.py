@@ -1,15 +1,27 @@
 import streamlit as st
 import pandas as pd
+import time
+
+from engine import PapilioLogic_Engine
 
 # --- CONFIGURACIÓN UI ---
 st.set_page_config(page_title="Papilio Logic", layout="wide", page_icon="🚢")
 
+if 'engine' not in st.session_state:
+    st.session_state.engine = PapilioLogic_Engine()
+
 st.title("🚢 Papilio Logic | Panel de Control")
+
+lista_muelles = st.session_state.engine.obtener_muelles_reales()
 
 # Barra lateral
 with st.sidebar:
     st.header("🛠️ Configuración")
-    st.button("Resetear Interfaz")
+    if st.button("Resetear Interfaz"):
+        st.session_state.engine.limpiar_base_de_datos()
+        st.success("Grafo de Neo4j limpiado correctamente")
+        time.sleep(3)
+        st.rerun() # Recarga la app para limpiar las tablas visuales
     st.divider()
     st.caption("Entorno: Docker")
 
@@ -20,7 +32,10 @@ with col_sim:
     st.subheader("🕹️ Entrada de Datos")
     with st.form("main_form"):
         v_name = st.text_input("Buque", "")
-        m_name = st.text_input("Muelle", "")
+        m_name = st.selectbox(
+            "Muelle", 
+            options=lista_muelles if lista_muelles else ["Sin muelles disponibles"]
+        )
         f_type = st.selectbox("Factor de Riesgo", ["Ninguno", "Niebla", "Tormenta", "Huelga", "Avería"])
         g_level = st.slider("Gravedad", 0, 15, 0)
         

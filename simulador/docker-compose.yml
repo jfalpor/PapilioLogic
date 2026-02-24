@@ -1,6 +1,8 @@
 services:
   app_cargar_datos:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: papilio_cargar_datos
     environment:
       - PL_GRAPH_URI=bolt://neo4j:7687

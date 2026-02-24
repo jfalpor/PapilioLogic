@@ -47,7 +47,7 @@ services:
       - "8501:8501"
     env_file: .env
     volumes:
-      - .:/app
+      - ./app:/app/app
     depends_on:
       neo4j:
         condition: service_healthy
