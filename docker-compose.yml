@@ -53,5 +53,18 @@ services:
         condition: service_healthy
       papilio_kafka:
         condition: service_started
-        
+
+  app_ingestor:
+    build: .
+    container_name: papilio_ingestor
+    command: python app/ingestor.py
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./app:/app/app
+    depends_on:
+      - papilio_kafka
+      - neo4j
+    env_file: .env
+
   # --- INTERFAZ INTELIGENTE (Ollama) ---
