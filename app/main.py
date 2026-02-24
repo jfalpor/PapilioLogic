@@ -39,20 +39,58 @@ with col_sim:
         f_type = st.selectbox("Factor de Riesgo", ["Ninguno", "Niebla", "Tormenta", "Huelga", "Avería"])
         g_level = st.slider("Gravedad", 0, 15, 0)
         
-        submitted = st.form_submit_button("Ejecutar")
+        col_btn1, col_btn2 = st.columns(2)
 
-with col_view:
+        with col_btn1:
+            submitted = st.form_submit_button("🚀 Ejecutar")
+            if submitted:
+                if v_name and m_name:
+                    with st.spinner("Actualizando Gemelo Digital..."):
+                        # Llamamos a la nueva función de guardado
+                        st.session_state.engine.guardar_evento_buque(v_name, m_name, f_type, g_level)
+                        st.success(f"Evento registrado: {v_name} en {m_name}")
+                        time.sleep(1)
+                        st.rerun() # Refrescamos para que aparezca en la tabla de la derecha
+                else:
+                    st.error("Por favor, introduce el nombre del Buque y selecciona un Muelle.")
+
+        with col_btn2:
+            submitted = st.form_submit_button("🔄 Refrescar")
+            if submitted:
+                st.rerun()
+
+with col_view: 
     st.subheader("🪞 Estado del Gemelo Digital")
     
-    # Tabla vacía con la estructura de Papilio Logic
-    columnas = ["Buque", "Muelle", "Factores", "Impacto"]
-    df_vacio = pd.DataFrame(columns=columnas)
+    # 1. Llamamos al método de la clase para obtener los datos frescos
+    df_gemelo = st.session_state.engine.get_digital_twin_status()
     
-    st.dataframe(df_vacio, use_container_width=True, hide_index=True)
+    # 2. Mostramos el DataFrame (si está vacío, mostrará solo las cabeceras)
+    st.dataframe(
+        df_gemelo, 
+        use_container_width=True, 
+        hide_index=True,
+        column_config={
+            "Impacto": st.column_config.TextColumn("⚠️ Impacto", help="Nivel de riesgo calculado por DoWhy")
+        }
+    )
     
-    if not submitted:
-        st.info("Esperando entrada de datos...")
+    # 3. Lógica de estado
+    if df_gemelo.empty:
+        st.warning("El Gemelo Digital no tiene datos de muelles o buques registrados.")
+    elif not submitted:
+        st.info("Visualizando estado actual. Realiza una consulta para ver el efecto mariposa.")
 
 st.divider()
 st.subheader("🦋 Análisis de Causalidad")
 st.caption("Módulo de análisis local mediante Papilio Logic.")
+
+st.divider()
+st.header("💬 Consola de Consulta LN (Papilio Logic)")
+pregunta_usuario = st.text_input("Pregunta (ej: ¿Cuál es el muelle con mayor calado?)")
+
+if st.button("Consultar Sistema"):
+    if pregunta_usuario:
+        with st.spinner('Consultando al Gemelo Digital...'):
+            respuesta = engine.consulta_libre_ln(pregunta_usuario)
+            st.chat_message("assistant").write(respuesta)
