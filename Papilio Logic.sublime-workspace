@@ -1,0 +1,503 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "docker-compose.yml",
+			"settings":
+			{
+				"buffer_size": 1081,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			},
+			"undo_stack":
+			[
+				[
+					5,
+					1,
+					"insert",
+					{
+						"characters": "\n\n"
+					},
+					"AwAAAIwBAAAAAAAAkwEAAAAAAAAAAAAAkwEAAAAAAACaAQAAAAAAAAAAAACNAQAAAAAAAI0BAAAAAAAABgAAACAgICAgIA",
+					"AQAAAAAAAAABAAAAjAEAAAAAAACMAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					6,
+					1,
+					"paste",
+					null,
+					"AQAAAJQBAAAAAAAAaQIAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAlAEAAAAAAACUAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					9,
+					2,
+					"left_delete",
+					null,
+					"AgAAAJIBAAAAAAAAkgEAAAAAAAACAAAAICCQAQAAAAAAAJABAAAAAAAAAgAAACAg",
+					"AQAAAAAAAAABAAAAlAEAAAAAAACUAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					12,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AQAAAGUCAAAAAAAAbAIAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAZQIAAAAAAABlAgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					13,
+					1,
+					"left_delete",
+					null,
+					"AQAAAGoCAAAAAAAAagIAAAAAAAACAAAAICA",
+					"AQAAAAAAAAABAAAAbAIAAAAAAABsAgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					14,
+					1,
+					"paste",
+					null,
+					"AQAAAGoCAAAAAAAABAMAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAagIAAAAAAABqAgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					20,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AQAAAGUCAAAAAAAAbAIAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAZQIAAAAAAABlAgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					21,
+					1,
+					"left_delete",
+					null,
+					"AQAAAGoCAAAAAAAAagIAAAAAAAACAAAAICA",
+					"AQAAAAAAAAABAAAAbAIAAAAAAABsAgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					22,
+					1,
+					"paste",
+					null,
+					"AQAAAGoCAAAAAAAAfAIAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAagIAAAAAAABqAgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					25,
+					2,
+					"left_delete",
+					null,
+					"AgAAAGwCAAAAAAAAbAIAAAAAAAACAAAAICBqAgAAAAAAAGoCAAAAAAAAAgAAACAg",
+					"AQAAAAAAAAABAAAAbgIAAAAAAABuAgAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					28,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AQAAABcDAAAAAAAAHgMAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAFwMAAAAAAAAXAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					29,
+					2,
+					"left_delete",
+					null,
+					"AgAAABwDAAAAAAAAHAMAAAAAAAACAAAAICAaAwAAAAAAABoDAAAAAAAAAgAAACAg",
+					"AQAAAAAAAAABAAAAHgMAAAAAAAAeAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					34,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AgAAABcDAAAAAAAAHgMAAAAAAAAAAAAAHwMAAAAAAAAfAwAAAAAAAAIAAAAgIA",
+					"AQAAAAAAAAABAAAAFwMAAAAAAAAXAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					35,
+					2,
+					"left_delete",
+					null,
+					"AgAAABwDAAAAAAAAHAMAAAAAAAACAAAAICAaAwAAAAAAABoDAAAAAAAAAgAAACAg",
+					"AQAAAAAAAAABAAAAHgMAAAAAAAAeAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					36,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AgAAABoDAAAAAAAAHQMAAAAAAAAAAAAAGAMAAAAAAAAYAwAAAAAAAAIAAAAgIA",
+					"AQAAAAAAAAABAAAAGgMAAAAAAAAaAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					37,
+					1,
+					"paste",
+					null,
+					"AQAAABsDAAAAAAAAcwQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAGwMAAAAAAAAbAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					49,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AQAAAI0DAAAAAAAAlAMAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAjQMAAAAAAACNAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					50,
+					1,
+					"paste",
+					null,
+					"AQAAAJQDAAAAAAAAogMAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAlAMAAAAAAACUAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					53,
+					1,
+					"left_delete",
+					null,
+					"AQAAAJIDAAAAAAAAkgMAAAAAAAACAAAAICA",
+					"AQAAAAAAAAABAAAAlAMAAAAAAACUAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					58,
+					2,
+					"right_delete",
+					null,
+					"AgAAAKEDAAAAAAAAoQMAAAAAAAC/AAAAICAgIGVudmlyb25tZW50OgogICAgICBBS0hRX0NPTkZJR1VSQVRJT046IHwKICAgICAgICBha2hxOgogICAgICAgICAgY29ubmVjdGlvbnM6CiAgICAgICAgICAgIHBhcGlsaW8ta2Fma2E6CiAgICAgICAgICAgICAgcHJvcGVydGllczoKICAgICAgICAgICAgICAgIGJvb3RzdHJhcC5zZXJ2ZXJzOiAicGFwaWxpb19rYWZrYToyOTA5MiKhAwAAAAAAAKEDAAAAAAAAAQAAAAo",
+					"AQAAAAAAAAABAAAAYAQAAAAAAAChAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					61,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AQAAAI0BAAAAAAAAjgEAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAjQEAAAAAAACNAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					62,
+					1,
+					"paste",
+					null,
+					"AQAAAI4BAAAAAAAAtAEAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAjgEAAAAAAACOAQAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					67,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AQAAAO4DAAAAAAAA7wMAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA7gMAAAAAAADuAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					68,
+					1,
+					"paste",
+					null,
+					"AQAAAO8DAAAAAAAADQQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA7wMAAAAAAADvAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					71,
+					1,
+					"insert",
+					{
+						"characters": "\t"
+					},
+					"AQAAAO8DAAAAAAAA8QMAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAA7wMAAAAAAADvAwAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					74,
+					1,
+					"insert",
+					{
+						"characters": "\n"
+					},
+					"AQAAAA8EAAAAAAAAEAQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAADwQAAAAAAAAPBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					75,
+					1,
+					"paste",
+					null,
+					"AQAAABAEAAAAAAAANwQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAEAQAAAAAAAAQBAAAAAAAAAAAAAAAAPC/"
+				],
+				[
+					78,
+					1,
+					"insert",
+					{
+						"characters": "\t"
+					},
+					"AQAAABAEAAAAAAAAEgQAAAAAAAAAAAAA",
+					"AQAAAAAAAAABAAAAEAQAAAAAAAAQBAAAAAAAAAAAAAAAAPC/"
+				]
+			]
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/carlo/Documents/dev/Papilio Logic"
+	],
+	"file_history":
+	[
+		"/C/Users/carlo/Documents/dev/Papilio Logic/.env",
+		"/C/Users/carlo/Documents/dev/Papilio Logic/.env.example",
+		"/C/Users/carlo/Documents/dev/Papilio Logic/docker-compose.yml",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/app/main.py",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/Modelfile",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/app/Modelfile",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/entrypoint.sh",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/Dockerfile.ollama",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/.env",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/simulador/muelles.txt",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/app/papilio_schema.json",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/simulador/simulador-sipla.py",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/simulador/muelles.py",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/app/consumer_to_graph.py",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/simulador/Dockerfile",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/simulador/docker-compose.yml",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/.env.example",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/app/pailiologic_brain.py",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/docker-compose.yml",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/app/interfaz.py",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/app/butterfly_effect_emitter.py",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/topics_catalog.md",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/README.md",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/notas.txt",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/app/simulador_sipla.py",
+		"/C/Program Files/Sublime Text/notas.txt",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/proyecto.sublime-project",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/Dockerfile",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/img/arquitectura.mmd",
+		"/C/Users/carlo/Documents/dev/PapilioLogic/.gitignore",
+		"/D/OneDrive/dev/proyecto/Dockerfile.ollama",
+		"/D/OneDrive/dev/proyecto/docker-compose.yml",
+		"/D/OneDrive/dev/proyecto/app/butterfly_effect_emitter.py",
+		"/D/OneDrive/dev/proyecto/app/main.py",
+		"/D/OneDrive/dev/proyecto/app/consumer_to_graph.py",
+		"/D/OneDrive/dev/proyecto/requirements.txt",
+		"/D/OneDrive/dev/proyecto/Dockerfile"
+	],
+	"find":
+	{
+		"height": 39.0
+	},
+	"find_in_files":
+	{
+		"height": 619.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"nexus"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"scrollbar_highlights": true,
+		"show_context": true,
+		"use_buffer2": true,
+		"use_gitignore": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "docker-compose.yml",
+					"selected": true,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1081,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								831,
+								831
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/YAML/YAML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 270.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"stack_multiselect": false,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 209.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0,
+		"history":
+		[
+		]
+	},
+	"pinned_build_system": "",
+	"project": "Papilio Logic.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 335.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

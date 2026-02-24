@@ -1,0 +1,24 @@
+# Entorno y Secretos
+.env
+.env.local
+.env.*.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+
+# IDEs
+.vscode/
+.idea/
+
+# Datos temporales (Neo4j/Kafka si los corres local)
+*.log
+
+# Datos de contenedores (Persistencia local)
+neo4j_data/
+ollama_data/
+kafka_data/

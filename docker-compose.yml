@@ -1,0 +1,57 @@
+services:
+  # --- BASE DE DATOS DE GRAFOS ---
+  neo4j:
+    image: neo4j:latest
+    container_name: papilio_graph
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    env_file: .env
+    healthcheck:
+      test: ["CMD", "wget", "http://localhost:7474", "-O", "/dev/null", "-q"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    volumes:
+      - ./neo4j_data:/data
+
+  # --- INFRAESTRUCTURA DE EVENTOS ---
+  papilio_kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: papilio_kafka
+    ports:
+      - "9092:9092"   # Acceso desde tu host (localhost)
+      - "29092:29092" # Acceso interno (Papilio Network)
+    env_file: .env
+    healthcheck:
+      test: ["CMD", "kafka-topics", "--bootstrap-server", "localhost:9092", "--list"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+
+  papilio_monitor:
+    image: tchiotludo/akhq:latest
+    container_name: papilio_akhq
+    ports:
+      - "8080:8080"
+    env_file: .env
+    depends_on:
+      - papilio_kafka
+
+  # --- LÓGICA DEL PROYECTO ---
+  app:
+    build: .
+    container_name: papilio_logic
+    ports:
+      - "8501:8501"
+    env_file: .env
+    volumes:
+      - .:/app
+    depends_on:
+      neo4j:
+        condition: service_healthy
+      papilio_kafka:
+        condition: service_started
+        
+  # --- INTERFAZ INTELIGENTE (Ollama) ---

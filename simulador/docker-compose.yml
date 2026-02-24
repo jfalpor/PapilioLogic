@@ -1,0 +1,31 @@
+services:
+  app_cargar_datos:
+    build: .
+    container_name: papilio_cargar_datos
+    environment:
+      - PL_GRAPH_URI=bolt://neo4j:7687
+      - PL_GRAPH_USER=neo4j
+      - PL_GRAPH_PASSWORD=papilio_logic_2026
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - red_papiliologic
+
+  app_simulador_sipla:
+    build:
+      context: .
+      dockerfile: Dockerfile.sipla
+    container_name: papilio_simulador_sipla
+    environment:
+      - PL_GRAPH_URI=bolt://neo4j:7687
+      - PL_GRAPH_USER=neo4j
+      - PL_GRAPH_PASSWORD=papilio_logic_2026
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - red_papiliologic
+
+networks:
+  red_papiliologic:
+    external: true
+    name: papiliologic_default

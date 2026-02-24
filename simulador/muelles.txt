@@ -1,0 +1,9 @@
+Dique Nelson Mandela (La Esfinge), 1.300, 16, 25, Hub energético y reparaciones navales
+Muelle Reina Sofía (Dique Exterior), 3.300, 20, 24, Reparaciones Offshore Plataformas y graneles
+Muelle de León y Castillo, 2.000, 14, 16, Contenedores (Terminal OPCSA)
+Muelle Cristóbal Colón, 1.000, 14, 14, Contenedores (Terminal La Luz/Boluda)
+Muelle Cambulloneros, 680, 11, 12, Carga general y Ro-Ro
+Muelle Gran Canaria, 1.100, 12, 14, Cruceros y Carga general
+Muelle Santa Catalina, 700, 7, 11, Terminal de Cruceros y Pasaje (Ferrys)
+Muelle Primo de Rivera, 350, 7, 10, Carga general / Polivalente
+Muelle de Sanapú, 450, 6, 8, Carga general / Pantalanes
