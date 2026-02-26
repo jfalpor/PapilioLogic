@@ -68,3 +68,33 @@ services:
     env_file: .env
 
   # --- INTERFAZ INTELIGENTE (Ollama) ---
+  ollama:
+    image: ollama/ollama:latest
+    container_name: papilio_ollama
+    volumes:
+      - ollama_storage:/root/.ollama
+    ports:
+      - "11434:11434"
+    env_file: .env
+
+  ollama-model-puller:
+    image: curlimages/curl:latest
+    container_name: papilio_ollama_puller
+    volumes:
+      - .:/modelfiles
+    depends_on:
+      - ollama
+    entrypoint: [ "/bin/sh", "-c" ]
+    command: |
+      "
+      echo '⏳ Esperando a que Ollama esté listo...'
+      until curl -s http://ollama:11434/api/tags > /dev/null; do sleep 5; done
+      echo '📦 Descargando modelo llama3.2 para Papilio Logic...'
+      curl -X POST http://ollama:11434/api/pull -d '{\"name\": \"llama3.2\"}'
+      echo '✅ Modelo listo para el muelle.'
+      docker exec ollama ollama create papilio-analyst -f /modelfiles/PapilioModelfile
+      echo '✅ Analista operativo en el muelle.'
+      "
+
+volumes:
+  ollama_storage:

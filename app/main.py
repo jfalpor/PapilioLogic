@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import time
+import requests
 
 from engine import PapilioLogic_Engine
 
@@ -81,9 +82,45 @@ with col_view:
     elif not submitted:
         st.info("Visualizando estado actual. Realiza una consulta para ver el efecto mariposa.")
 
-st.divider()
-st.subheader("🦋 Análisis de Causalidad")
-st.caption("Módulo de análisis local mediante Papilio Logic.")
+    st.divider()
+    st.subheader("🦋 Análisis de Causalidad")
+    st.caption("Módulo de análisis local mediante Papilio Logic.")
+
+    if st.button("Generar Informe de Efecto Mariposa"):
+        if not df_gemelo.empty:
+            # Convertimos el estado actual del muelle a JSON para Kafka
+            datos = df_gemelo.to_dict(orient='records')
+            st.session_state.engine.solicitar_informe_mariposa(datos)
+            st.success("Mensaje enviado a Kafka. Verifícalo ahora en AKHQ.")
+        else:
+            st.write("Registra datos en el muelle para habilitar el análisis causal.")
+
+    # --- SECCIÓN DE INFORME EFECTO MARIPOSA ---
+    st.divider()
+    col_inf, col_refresh = st.columns([3, 1])
+    
+    with col_inf:
+        st.subheader("🦋 Analista Papilio Logic")
+
+    with col_refresh:
+        # Al pulsar este botón, forzamos la búsqueda manual
+        if st.button("📥 Buscar Informe"):
+            with st.spinner("Consultando bus de datos..."):
+                res = st.session_state.engine.obtener_analisis_papilio()
+                if res:
+                    st.session_state['ultimo_informe'] = res
+                    st.success("¡Informe actualizado!")
+                else:
+                    st.error("No se encontraron informes nuevos.")
+
+    # Siempre mostramos lo que haya en el estado de la sesión
+    if 'ultimo_informe' in st.session_state:
+        inf = st.session_state['ultimo_informe']
+        with st.expander("📄 Ver último Informe Causal", expanded=True):
+            st.caption(f"Generado para el muelle: {inf.get('muelle', 'General')}")
+            st.write(inf.get('contenido'))
+    else:
+        st.info("Pulsa 'Buscar Informe' para recuperar el análisis de Kafka.")
 
 st.divider()
 st.header("💬 Consola de Consulta LN (Papilio Logic)")

@@ -1,0 +1,1 @@
+ollama create papilio-analyst -f PapilioModelfile
